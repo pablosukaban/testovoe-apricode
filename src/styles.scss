@@ -1,3 +1,71 @@
-body {
-  background: lightblue;
+$lightGray: #ccc;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+html {
+  font-family: sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 10px;
+  gap: 10px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+// ======== task tree ========
+
+.tree-container {
+  border: 1px solid $lightGray;
+  border-radius: 10px;
+  padding: 15px;
+
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid $lightGray;
+  border-radius: 7px;
+
+  font-size: 1.125rem;
+}
+
+// ===== task view =====
+
+
+.view-container {
+  border: 1px solid $lightGray;
+  border-radius: 10px;
+  padding: 15px;
+
+  p {
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+  }
+}
+
+
