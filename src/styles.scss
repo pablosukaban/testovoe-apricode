@@ -1,4 +1,5 @@
-$lightGray: #ccc;
+$gray: #ccc;
+$lightGray: #eee;
 
 * {
   box-sizing: border-box;
@@ -29,7 +30,7 @@ h2 {
 // ======== task tree ========
 
 .tree-container {
-  border: 1px solid $lightGray;
+  border: 1px solid $gray;
   border-radius: 10px;
   padding: 15px;
 
@@ -42,23 +43,42 @@ h2 {
   gap: 8px;
 }
 
-.task-item {
+.task-item-container {
+
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px;
-  border: 1px solid $lightGray;
   border-radius: 7px;
+  padding: 5px 0 5px 10px;
+
+  background: $lightGray;
 
   font-size: 1.125rem;
+
+  .task-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid $gray;
+    cursor: pointer;
+  }
+
+  .task-item-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  .task-item-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
 }
 
 // ===== task view =====
 
 
 .view-container {
-  border: 1px solid $lightGray;
+  border: 1px solid $gray;
   border-radius: 10px;
   padding: 15px;
 
