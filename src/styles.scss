@@ -11,10 +11,6 @@ html {
   font-family: sans-serif;
 }
 
-//body {
-//  min-height: 100vh;
-//}
-
 .wrapper {
   min-height: 100vh;
   display: grid;
@@ -48,10 +44,20 @@ h2 {
   border-radius: 7px;
   padding: 5px 0 5px 10px;
   font-size: 1.125rem;
-}
 
-.task-item-container.active {
-  background: $lightGray;
+  cursor: pointer;
+
+  border: 2px solid transparent;
+
+  transition: all 200ms ease;
+
+  &:hover {
+    border-color: #ccc;
+  }
+
+  &.active {
+    background: $lightGray;
+  }
 }
 
 .task-checkbox {
@@ -72,6 +78,11 @@ h2 {
   display: flex;
   align-items: center;
   gap: 4px;
+
+  &.completed {
+    text-decoration: line-through;
+    color: $gray;
+  }
 }
 
 // ===== task view =====

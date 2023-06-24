@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 export type Task = {
   id: number;
@@ -71,11 +71,7 @@ class TaskState {
   chosenTask: Task | null = null;
 
   constructor() {
-    makeObservable(this, {
-      tasksList: observable,
-      chosenTask: observable,
-      chooseTask: action,
-    });
+    makeAutoObservable(this);
   }
 
   chooseTask(taskId: number) {
@@ -84,6 +80,14 @@ class TaskState {
     if (!found) return;
 
     this.chosenTask = found;
+  }
+
+  completeTask(taskId: number) {
+    const found = findTaskById(this.tasksList, taskId);
+
+    if (!found) return;
+
+    found.completed = !found.completed;
   }
 }
 

@@ -1,12 +1,17 @@
-import taskState from '../store/TaskState.ts';
 import { observer } from 'mobx-react-lite';
+import taskState from '../store/TaskState.ts';
 
 const TaskView = observer(() => {
   return (
     <div className={'view-container'}>
-      <h2>Task View</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <p>{taskState.chosenTask && <span>{taskState.chosenTask.id}</span>}</p>
+      {taskState.chosenTask ? (
+        <>
+          <h2>{taskState.chosenTask.title}</h2>
+          <p>{taskState.chosenTask.description}</p>
+        </>
+      ) : (
+        <h1>Выберите задачу</h1>
+      )}
     </div>
   );
 });
