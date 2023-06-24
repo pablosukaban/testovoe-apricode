@@ -159,6 +159,18 @@ h2 {
     border: 1px solid $gray;
     border-radius: 5px;
   }
+  
+  button {
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+  }
 }
 
 // ===== task view =====

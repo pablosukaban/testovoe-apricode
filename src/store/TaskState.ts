@@ -101,6 +101,14 @@ class TaskState {
       subTaskList: [],
     });
   }
+
+  editTitle(taskId: number, title: string) {
+    const found = findTaskById(this.tasksList, taskId);
+
+    if (!found) return;
+
+    found.title = title;
+  }
 }
 
 export default new TaskState();

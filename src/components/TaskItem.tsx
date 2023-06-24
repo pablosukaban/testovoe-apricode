@@ -2,7 +2,7 @@ import taskState, { Task } from '../store/TaskState.ts';
 import { ChevronRight, ChevronDown, Check, X } from 'lucide-react';
 import { observer } from 'mobx-react-lite';
 import { MoreHorizontal } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TaskMenu } from './TaskMenu.tsx';
 
 type TaskItemProps = {
@@ -24,8 +24,16 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     setIsEditing(true);
   };
 
-  const endEditing = () => {
+  const cancelEditing = () => {
     setIsEditing(false);
+  };
+
+  const submitEditing = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsEditing(false);
+
+    taskState.editTitle(givenTask.id, editValue);
   };
 
   const handleItemClick = (e: React.MouseEvent, id: number) => {
@@ -55,6 +63,12 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     console.log('more');
   };
 
+  const editInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    editInputRef.current?.focus();
+  }, [isEditing]);
+
   return (
     <div
       className={`task-item-container ${givenTask.isActive && 'active'}`}
@@ -62,19 +76,22 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     >
       <div className={'task-item-main'}>
         {isEditing ? (
-          <div className={'task-item-edit'}>
+          <form className={'task-item-edit'} onSubmit={submitEditing}>
             <input
+              ref={editInputRef}
               type={'text'}
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
             />
-            <span>
-              <Check />
+            <span className={'buttons'}>
+              <button>
+                <Check />
+              </button>
+              <button type={'button'} onClick={cancelEditing}>
+                <X />
+              </button>
             </span>
-            <span onClick={endEditing}>
-              <X />
-            </span>
-          </div>
+          </form>
         ) : (
           <>
             <label
