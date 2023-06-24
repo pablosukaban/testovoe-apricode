@@ -1,11 +1,12 @@
 import taskState, { Task } from '../store/TaskState.ts';
 import { ChevronRight, ChevronDown } from 'lucide-react';
+import { observer } from 'mobx-react-lite';
 
 type TaskItemProps = {
   givenTask: Task;
 };
 
-const TaskItem = ({ givenTask }: TaskItemProps) => {
+const TaskItem = observer(({ givenTask }: TaskItemProps) => {
   const handleItemClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
 
@@ -24,11 +25,12 @@ const TaskItem = ({ givenTask }: TaskItemProps) => {
         </label>
         <input type={'checkbox'} className={'task-checkbox'} />
       </div>
-      {givenTask.subTaskList.map((item) => (
-        <TaskItem givenTask={item} key={item.id} />
-      ))}
+      {givenTask.isActive &&
+        givenTask.subTaskList.map((item) => (
+          <TaskItem givenTask={item} key={item.id} />
+        ))}
     </div>
   );
-};
+});
 
 export default TaskItem;

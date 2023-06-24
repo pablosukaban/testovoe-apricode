@@ -94,7 +94,7 @@ function findTaskById(tasks: Task[], id: number): Task | null {
     const task = tasks[i];
 
     if (task.id === id) {
-      task.isActive = true;
+      task.isActive = !task.isActive;
       result = task;
 
       return result;

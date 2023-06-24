@@ -6,7 +6,7 @@ const TaskView = observer(() => {
     <div className={'view-container'}>
       <h2>Task View</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <p>{taskState.chosenTask && taskState.chosenTask.id}</p>
+      <p>{taskState.chosenTask && <span>{taskState.chosenTask.id}</span>}</p>
     </div>
   );
 });
