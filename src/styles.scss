@@ -40,6 +40,8 @@ h2 {
 }
 
 .task-item-container {
+  position: relative;
+
   width: 100%;
   border-radius: 7px;
   padding: 5px 0 5px 10px;
@@ -83,6 +85,52 @@ h2 {
     text-decoration: line-through;
     color: $gray;
   }
+}
+
+.task-menu {
+  position: absolute;
+  bottom: -15px;
+  right: 10px;
+  display: none;
+
+  z-index: 10;
+
+  background: white;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1.125rem;
+
+  &.open {
+    display: block;
+  }
+}
+
+.tree-header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    font-size: 1.25rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.task-options {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 // ===== task view =====

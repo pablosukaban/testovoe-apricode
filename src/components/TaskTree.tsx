@@ -3,9 +3,16 @@ import TaskItem from './TaskItem.tsx';
 import { observer } from 'mobx-react-lite';
 
 const TaskTree = observer(() => {
+  const handleAddButtonClick = () => {
+    taskState.addEmptyTask();
+  };
+
   return (
     <div className={'tree-container'}>
-      <h2>Task tree</h2>
+      <div className={'tree-header'}>
+        <h2>Task tree</h2>
+        <button onClick={handleAddButtonClick}>Add</button>
+      </div>
       <ul className={'task-list'}>
         {taskState.tasksList.map((item) => (
           <TaskItem givenTask={item} key={item.id} />

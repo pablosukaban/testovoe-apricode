@@ -1,17 +1,31 @@
 import taskState, { Task } from '../store/TaskState.ts';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import { observer } from 'mobx-react-lite';
-import { useRef } from 'react';
+import { MoreHorizontal } from 'lucide-react';
+import { useState } from 'react';
+
+type TaskMenuProps = {
+  isMenuOpened: boolean;
+  closeMenu: () => void;
+};
+
+const TaskMenu = ({ closeMenu, isMenuOpened }: TaskMenuProps) => {
+  return <div className={`task-menu ${isMenuOpened && 'open'}`}>123</div>;
+};
 
 type TaskItemProps = {
   givenTask: Task;
 };
 
 const TaskItem = observer(({ givenTask }: TaskItemProps) => {
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
+
   const handleItemClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
 
     taskState.chooseTask(id);
+
+    console.log('click');
   };
 
   const handleCheckboxChange = (
@@ -21,9 +35,17 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     e.stopPropagation();
 
     taskState.completeTask(id);
+
+    console.log('checkbox');
   };
 
-  const checkRef = useRef<HTMLInputElement>(null);
+  const handleMoreClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    setIsMenuOpened(!isMenuOpened);
+
+    console.log('more');
+  };
 
   return (
     <div
@@ -39,18 +61,26 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
             {givenTask.title}
           </span>
         </label>
-        <input
-          ref={checkRef}
-          type={'checkbox'}
-          className={'task-checkbox'}
-          checked={givenTask.completed}
-          onChange={(e) => handleCheckboxChange(e, givenTask.id)}
-        />
+        <span className={'task-options'}>
+          <span onClick={handleMoreClick}>
+            <MoreHorizontal />
+          </span>
+          <input
+            type={'checkbox'}
+            className={'task-checkbox'}
+            checked={givenTask.completed}
+            onChange={(e) => handleCheckboxChange(e, givenTask.id)}
+          />
+        </span>
       </div>
       {givenTask.isActive &&
         givenTask.subTaskList.map((item) => (
           <TaskItem givenTask={item} key={item.id} />
         ))}
+      <TaskMenu
+        closeMenu={() => setIsMenuOpened(false)}
+        isMenuOpened={isMenuOpened}
+      />
     </div>
   );
 });

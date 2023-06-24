@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import { findTaskById } from '../utils/utils.ts';
 
 export type Task = {
   id: number;
@@ -89,31 +90,17 @@ class TaskState {
 
     found.completed = !found.completed;
   }
-}
 
-function findTaskById(tasks: Task[], id: number): Task | null {
-  let result: Task | null = null;
-
-  for (let i = 0; i < tasks.length; i++) {
-    const task = tasks[i];
-
-    if (task.id === id) {
-      task.isActive = !task.isActive;
-      result = task;
-
-      return result;
-    }
-
-    if (task.subTaskList.length > 0) {
-      result = findTaskById(task.subTaskList, id);
-
-      if (result !== null) {
-        return result;
-      }
-    }
+  addEmptyTask() {
+    this.tasksList.push({
+      id: Date.now(),
+      title: 'New task',
+      description: 'Add description',
+      completed: false,
+      isActive: false,
+      subTaskList: [],
+    });
   }
-
-  return result;
 }
 
 export default new TaskState();
