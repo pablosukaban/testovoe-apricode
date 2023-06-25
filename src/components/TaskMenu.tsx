@@ -59,7 +59,7 @@ export const TaskMenu = observer(
           }
         });
       };
-    }, []);
+    }, [closeMenu]);
 
     return (
       <ul className={`task-menu ${isMenuOpened && 'open'}`}>

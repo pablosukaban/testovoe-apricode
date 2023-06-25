@@ -5,34 +5,27 @@ import { MoreHorizontal } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { TaskMenu } from './TaskMenu.tsx';
 
-type TaskItemProps = {
+type EditFieldProps = {
   givenTask: Task;
+  closeEdit: () => void;
 };
 
-const TaskItem = observer(({ givenTask }: TaskItemProps) => {
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
-
-  const [isEditing, setIsEditing] = useState(
-    givenTask.isEditing ? givenTask.isEditing : false,
-  );
-
+const EditField = ({ givenTask, closeEdit }: EditFieldProps) => {
   const [editValue, setEditValue] = useState(givenTask.title);
 
   const editInputRef = useRef<HTMLInputElement>(null);
 
-  const closeMenu = () => {
-    setIsMenuOpened(false);
-  };
-
-  const startEditing = () => {
-    closeMenu();
-    setIsEditing(true);
+  const handleEditInputFocus = () => {
+    if (editInputRef.current) {
+      editInputRef.current.select();
+    }
   };
 
   const cancelEditing = (e: React.FormEvent) => {
     e.preventDefault();
 
-    setIsEditing(false);
+    closeEdit();
+
     taskState.editTitle(givenTask.id, givenTask.title);
   };
 
@@ -44,9 +37,56 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
       return;
     }
 
-    setIsEditing(false);
+    closeEdit();
 
     taskState.editTitle(givenTask.id, editValue);
+  };
+
+  useEffect(() => {
+    editInputRef.current?.focus();
+  }, []);
+
+  return (
+    <form className={'task-item-edit'} onSubmit={submitEditing}>
+      <input
+        ref={editInputRef}
+        type={'text'}
+        value={editValue}
+        onChange={(e) => setEditValue(e.target.value)}
+        onFocus={handleEditInputFocus}
+      />
+      <span className={'buttons'}>
+        <button>
+          <Check />
+        </button>
+        <button onClick={cancelEditing}>
+          <X />
+        </button>
+      </span>
+    </form>
+  );
+};
+
+type TaskItemProps = {
+  givenTask: Task;
+};
+
+const TaskItem = observer(({ givenTask }: TaskItemProps) => {
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
+
+  const [isEditing, setIsEditing] = useState(
+    givenTask.isEditing ? givenTask.isEditing : false,
+  );
+
+  const editInputRef = useRef<HTMLInputElement>(null);
+
+  const closeMenu = () => {
+    setIsMenuOpened(false);
+  };
+
+  const startEditing = () => {
+    closeMenu();
+    setIsEditing(true);
   };
 
   const handleItemClick = (e: React.MouseEvent) => {
@@ -77,12 +117,6 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     editInputRef.current?.focus();
   }, [isEditing]);
 
-  const handleEditInputFocus = () => {
-    if (editInputRef.current) {
-      editInputRef.current.select();
-    }
-  };
-
   const handleAddSubtask = () => {
     taskState.addSubTask(givenTask.id);
   };
@@ -94,23 +128,10 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     >
       <div className={'task-item-main'}>
         {isEditing ? (
-          <form className={'task-item-edit'} onSubmit={submitEditing}>
-            <input
-              ref={editInputRef}
-              type={'text'}
-              value={editValue}
-              onChange={(e) => setEditValue(e.target.value)}
-              onFocus={handleEditInputFocus}
-            />
-            <span className={'buttons'}>
-              <button>
-                <Check />
-              </button>
-              <button onClick={cancelEditing}>
-                <X />
-              </button>
-            </span>
-          </form>
+          <EditField
+            givenTask={givenTask}
+            closeEdit={() => setIsEditing(false)}
+          />
         ) : (
           <>
             <label
