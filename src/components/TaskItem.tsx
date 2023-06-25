@@ -69,6 +69,10 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     taskState.chooseTask(givenTask.id);
   };
 
+  const handleDeleteItem = () => {
+    taskState.deleteTask(givenTask.id);
+  };
+
   useEffect(() => {
     editInputRef.current?.focus();
   }, [isEditing]);
@@ -126,6 +130,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
                 isMenuOpened={isMenuOpened}
                 startEditing={startEditing}
                 handleAddSubtask={handleAddSubtask}
+                handleDeleteTask={handleDeleteItem}
               />
               <input
                 type={'checkbox'}

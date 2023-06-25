@@ -7,6 +7,14 @@ type ViewTaskProps = {
 };
 
 const ViewTask = observer(({ startEditing }: ViewTaskProps) => {
+  const handleDeleteClick = () => {
+    if (!taskState.chosenTask) {
+      return;
+    }
+
+    taskState.deleteTask(taskState.chosenTask.id);
+  };
+
   return (
     <>
       <div className={'view-header'}>
@@ -15,7 +23,7 @@ const ViewTask = observer(({ startEditing }: ViewTaskProps) => {
             <h2>{taskState.chosenTask.title}</h2>
             <div className={'buttons'}>
               <button onClick={startEditing}>Редактировать</button>
-              <button>Удалить</button>
+              <button onClick={handleDeleteClick}>Удалить</button>
             </div>
           </>
         ) : (

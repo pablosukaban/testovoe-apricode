@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { findTaskById } from '../utils/utils.ts';
+import { findTaskById, removeTaskById } from '../utils/utils.ts';
 
 export type Task = {
   id: number;
@@ -141,6 +141,11 @@ class TaskState {
 
     this.chosenTask.title = title;
     this.chosenTask.description = description;
+  }
+
+  deleteTask(taskId: number) {
+    removeTaskById(this.tasksList, taskId);
+    this.chosenTask = null;
   }
 }
 

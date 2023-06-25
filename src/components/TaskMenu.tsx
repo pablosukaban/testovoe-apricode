@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 
 type TaskMenuProps = {
@@ -6,6 +6,7 @@ type TaskMenuProps = {
   closeMenu: () => void;
   startEditing: () => void;
   handleAddSubtask: () => void;
+  handleDeleteTask: () => void;
 };
 
 export const TaskMenu = observer(
@@ -14,6 +15,7 @@ export const TaskMenu = observer(
     isMenuOpened,
     startEditing,
     handleAddSubtask,
+    handleDeleteTask,
   }: TaskMenuProps) => {
     const handleEditClick = (e: React.MouseEvent) => {
       e.stopPropagation();
@@ -28,8 +30,17 @@ export const TaskMenu = observer(
       closeMenu();
     };
 
-    const handleAddClick = () => {
+    const handleAddClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+
       handleAddSubtask();
+
+      closeMenu();
+    };
+
+    const handleDeleteClick = (e: React.MouseEvent) => {
+      e.stopPropagation();
+      handleDeleteTask();
 
       closeMenu();
     };
@@ -54,7 +65,7 @@ export const TaskMenu = observer(
       <ul className={`task-menu ${isMenuOpened && 'open'}`}>
         <li onClick={handleAddClick}>Добавить</li>
         <li onClick={handleEditClick}>Редактировать</li>
-        <li>Удалить</li>
+        <li onClick={handleDeleteClick}>Удалить</li>
         <li onClick={handleCloseClick}>Закрыть</li>
       </ul>
     );

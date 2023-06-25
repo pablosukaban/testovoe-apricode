@@ -24,3 +24,14 @@ export function findTaskById(tasks: Task[], id: number): Task | null {
 
   return result;
 }
+
+export function removeTaskById(list: Task[], id: number) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id === id) {
+      list.splice(i, 1);
+      return;
+    } else if (list[i].subTaskList && list[i].subTaskList.length > 0) {
+      removeTaskById(list[i].subTaskList, id);
+    }
+  }
+}
