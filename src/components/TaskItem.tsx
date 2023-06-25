@@ -12,7 +12,13 @@ type TaskItemProps = {
 const TaskItem = observer(({ givenTask }: TaskItemProps) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(() => {
+    if (givenTask.isEditing) {
+      return givenTask.isEditing;
+    }
+
+    return false;
+  });
   const [editValue, setEditValue] = useState(givenTask.title);
 
   const closeMenu = () => {
@@ -69,6 +75,12 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     editInputRef.current?.focus();
   }, [isEditing]);
 
+  const handleEditInputFocus = () => {
+    if (editInputRef.current) {
+      editInputRef.current.select();
+    }
+  };
+
   return (
     <div
       className={`task-item-container ${givenTask.isActive && 'active'}`}
@@ -82,6 +94,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
               type={'text'}
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
+              onFocus={handleEditInputFocus}
             />
             <span className={'buttons'}>
               <button>

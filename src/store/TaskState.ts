@@ -7,6 +7,7 @@ export type Task = {
   description: string;
   completed: boolean;
   isActive: boolean;
+  isEditing?: boolean;
   subTaskList: Task[];
 };
 
@@ -18,6 +19,7 @@ class TaskState {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
       completed: false,
       isActive: false,
+      isEditing: false,
       subTaskList: [
         {
           id: 1.1,
@@ -26,6 +28,7 @@ class TaskState {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
           completed: false,
           isActive: false,
+          isEditing: false,
           subTaskList: [
             {
               id: 1.11,
@@ -34,6 +37,7 @@ class TaskState {
                 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
               completed: false,
               isActive: false,
+              isEditing: false,
               subTaskList: [],
             },
           ],
@@ -45,6 +49,7 @@ class TaskState {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
           completed: false,
           isActive: false,
+          isEditing: false,
           subTaskList: [],
         },
       ],
@@ -55,6 +60,7 @@ class TaskState {
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
       completed: false,
       isActive: false,
+      isEditing: false,
       subTaskList: [
         {
           id: 2.1,
@@ -63,6 +69,7 @@ class TaskState {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
           completed: false,
           isActive: false,
+          isEditing: false,
           subTaskList: [],
         },
       ],
@@ -98,6 +105,7 @@ class TaskState {
       description: 'Add description',
       completed: false,
       isActive: false,
+      isEditing: true,
       subTaskList: [],
     });
   }
