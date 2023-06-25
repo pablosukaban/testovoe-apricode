@@ -3,10 +3,24 @@ import TaskView from './components/TaskView.tsx';
 
 const App = () => {
   return (
-    <div className={'wrapper'}>
-      <TaskTree />
-      <TaskView />
-    </div>
+    <>
+      <div className={'wrapper'}>
+        <div className={'container'}>
+          <TaskTree />
+          <TaskView />
+        </div>
+        <footer className={'footer'}>
+          Тестовое задание. Код доступен на{' '}
+          <a
+            href={'https://github.com/pablosukaban/testovoe-apricode'}
+            target={'_blank'}
+          >
+            GitHub
+          </a>
+          .
+        </footer>
+      </div>
+    </>
   );
 };
 
