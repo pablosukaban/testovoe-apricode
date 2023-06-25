@@ -12,14 +12,13 @@ type TaskItemProps = {
 const TaskItem = observer(({ givenTask }: TaskItemProps) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(() => {
-    if (givenTask.isEditing) {
-      return givenTask.isEditing;
-    }
+  const [isEditing, setIsEditing] = useState(
+    givenTask.isEditing ? givenTask.isEditing : false,
+  );
 
-    return false;
-  });
   const [editValue, setEditValue] = useState(givenTask.title);
+
+  const editInputRef = useRef<HTMLInputElement>(null);
 
   const closeMenu = () => {
     setIsMenuOpened(false);
@@ -30,8 +29,11 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     setIsEditing(true);
   };
 
-  const cancelEditing = () => {
+  const cancelEditing = (e: React.FormEvent) => {
+    e.preventDefault();
+
     setIsEditing(false);
+    taskState.editTitle(givenTask.id, givenTask.title);
   };
 
   const submitEditing = (e: React.FormEvent) => {
@@ -42,23 +44,16 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     taskState.editTitle(givenTask.id, editValue);
   };
 
-  const handleItemClick = (e: React.MouseEvent, id: number) => {
+  const handleItemClick = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    taskState.chooseTask(id);
-
-    console.log('click');
+    taskState.chooseTask(givenTask.id);
   };
 
-  const handleCheckboxChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    id: number,
-  ) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
 
-    taskState.completeTask(id);
-
-    console.log('checkbox');
+    taskState.completeTask(givenTask.id);
   };
 
   const handleMoreClick = (e: React.MouseEvent) => {
@@ -66,10 +61,8 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
 
     setIsMenuOpened(!isMenuOpened);
 
-    console.log('more');
+    taskState.chooseTask(givenTask.id);
   };
-
-  const editInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     editInputRef.current?.focus();
@@ -81,10 +74,14 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     }
   };
 
+  const handleAddSubtask = () => {
+    taskState.addSubTask(givenTask.id);
+  };
+
   return (
     <div
       className={`task-item-container ${givenTask.isActive && 'active'}`}
-      onClick={(e) => handleItemClick(e, givenTask.id)}
+      onClick={(e) => handleItemClick(e)}
     >
       <div className={'task-item-main'}>
         {isEditing ? (
@@ -100,7 +97,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
               <button>
                 <Check />
               </button>
-              <button type={'button'} onClick={cancelEditing}>
+              <button onClick={cancelEditing}>
                 <X />
               </button>
             </span>
@@ -123,12 +120,13 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
                 closeMenu={closeMenu}
                 isMenuOpened={isMenuOpened}
                 startEditing={startEditing}
+                handleAddSubtask={handleAddSubtask}
               />
               <input
                 type={'checkbox'}
                 className={'task-checkbox'}
                 checked={givenTask.completed}
-                onChange={(e) => handleCheckboxChange(e, givenTask.id)}
+                onChange={(e) => handleCheckboxChange(e)}
               />
             </span>
           </>

@@ -116,6 +116,24 @@ class TaskState {
     if (!found) return;
 
     found.title = title;
+
+    found.isEditing = false;
+  }
+
+  addSubTask(taskId: number) {
+    const found = findTaskById(this.tasksList, taskId);
+
+    if (!found) return;
+
+    found.subTaskList.push({
+      id: Date.now(),
+      title: 'New subtask',
+      description: 'Add description',
+      completed: false,
+      isActive: false,
+      isEditing: true,
+      subTaskList: [],
+    });
   }
 }
 
