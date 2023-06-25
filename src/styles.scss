@@ -1,6 +1,7 @@
 $clr-primary: #ccc;
 $clr-primary-light: #eee;
 $clr-primary-dark: #333;
+$border: 1px solid $clr-primary;
 
 * {
   box-sizing: border-box;
@@ -16,13 +17,15 @@ html {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
 }
 
 .container {
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  //grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 2fr;
   gap: 10px;
   padding: 10px;
 }
@@ -31,7 +34,6 @@ html {
   text-align: center;
   padding: 10px;
   font-size: 1rem;
-  color: $clr-primary-dark;
 
   a {
     font-weight: bold;
@@ -51,10 +53,12 @@ h2 {
 // ======== task tree ========
 
 .tree-container {
-  border: 1px solid $clr-primary;
+  border: $border;
   border-radius: 10px;
   padding: 15px;
   height: 100%;
+
+  overflow-y: scroll;
 }
 
 .task-list {
@@ -89,7 +93,7 @@ h2 {
 .task-checkbox {
   width: 20px;
   height: 20px;
-  border: 1px solid $clr-primary;
+  border: $border;
   cursor: pointer;
 }
 
@@ -169,7 +173,7 @@ h2 {
 input {
   width: 100%;
   padding: 7px;
-  border: 1px solid $clr-primary;
+  border: $border;
   border-radius: 5px;
 }
 
@@ -204,7 +208,7 @@ input {
 
 
 .view-container {
-  border: 1px solid $clr-primary;
+  border: $border;
   border-radius: 10px;
   padding: 15px;
   height: 100%;
@@ -262,10 +266,21 @@ input {
 
     height: 100%;
     padding: 5px;
-    border: 1px solid $clr-primary;
+    border: $border;
     border-radius: 5px;
 
     font-size: 1.125rem;
     resize: none;
+  }
+}
+
+@media (min-width: 800px) {
+  .container {
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto;
+  }
+
+  .tree-container {
+    overflow-y: hidden;
   }
 }
