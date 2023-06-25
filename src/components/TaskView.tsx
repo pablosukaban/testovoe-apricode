@@ -13,6 +13,7 @@ const ViewTask = observer(({ startEditing }: ViewTaskProps) => {
     }
 
     taskState.deleteTask(taskState.chosenTask.id);
+    localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
   return (
@@ -56,6 +57,7 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
     }
 
     taskState.editFullInfo(editValue);
+    localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
     cancelEditing();
   };
 

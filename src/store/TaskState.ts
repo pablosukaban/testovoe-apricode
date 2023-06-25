@@ -11,75 +11,81 @@ export type Task = {
   subTaskList: Task[];
 };
 
+export const tempData = [
+  {
+    id: 1,
+    title: 'Task 1',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+    completed: false,
+    isActive: false,
+    isEditing: false,
+    subTaskList: [
+      {
+        id: 1.1,
+        title: 'Task 1.1',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        completed: false,
+        isActive: false,
+        isEditing: false,
+        subTaskList: [
+          {
+            id: 1.11,
+            title: 'Task 1.1.1',
+            description:
+              'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+            completed: false,
+            isActive: false,
+            isEditing: false,
+            subTaskList: [],
+          },
+        ],
+      },
+      {
+        id: 1.2,
+        title: 'Task 1.2',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        completed: false,
+        isActive: false,
+        isEditing: false,
+        subTaskList: [],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Task 2',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+    completed: false,
+    isActive: false,
+    isEditing: false,
+    subTaskList: [
+      {
+        id: 2.1,
+        title: 'Task 2.1',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        completed: false,
+        isActive: false,
+        isEditing: false,
+        subTaskList: [],
+      },
+    ],
+  },
+];
+
 class TaskState {
-  tasksList: Task[] = [
-    {
-      id: 1,
-      title: 'Task 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-      completed: false,
-      isActive: false,
-      isEditing: false,
-      subTaskList: [
-        {
-          id: 1.1,
-          title: 'Task 1.1',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-          completed: false,
-          isActive: false,
-          isEditing: false,
-          subTaskList: [
-            {
-              id: 1.11,
-              title: 'Task 1.1.1',
-              description:
-                'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-              completed: false,
-              isActive: false,
-              isEditing: false,
-              subTaskList: [],
-            },
-          ],
-        },
-        {
-          id: 1.2,
-          title: 'Task 1.2',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-          completed: false,
-          isActive: false,
-          isEditing: false,
-          subTaskList: [],
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: 'Task 2',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-      completed: false,
-      isActive: false,
-      isEditing: false,
-      subTaskList: [
-        {
-          id: 2.1,
-          title: 'Task 2.1',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-          completed: false,
-          isActive: false,
-          isEditing: false,
-          subTaskList: [],
-        },
-      ],
-    },
-  ];
+  tasksList: Task[] = [];
 
   chosenTask: Task | null = null;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  setTaskList(list: Task[]) {
+    this.tasksList = list;
   }
 
   chooseTask(taskId: number) {

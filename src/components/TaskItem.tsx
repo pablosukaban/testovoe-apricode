@@ -40,6 +40,7 @@ const EditField = ({ givenTask, closeEdit }: EditFieldProps) => {
     closeEdit();
 
     taskState.editTitle(givenTask.id, editValue);
+    localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
   useEffect(() => {
@@ -99,6 +100,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     e.stopPropagation();
 
     taskState.completeTask(givenTask.id);
+    localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
   const handleMoreClick = (e: React.MouseEvent) => {
@@ -111,6 +113,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
 
   const handleDeleteItem = () => {
     taskState.deleteTask(givenTask.id);
+    localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
   useEffect(() => {
@@ -119,6 +122,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
 
   const handleAddSubtask = () => {
     taskState.addSubTask(givenTask.id);
+    localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
   return (
