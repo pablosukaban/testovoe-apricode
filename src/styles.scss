@@ -1,5 +1,6 @@
-$gray: #ccc;
-$lightGray: #eee;
+$clr-primary: #ccc;
+$clr-primary-light: #eee;
+$clr-primary-dark: #333;
 
 * {
   box-sizing: border-box;
@@ -30,11 +31,11 @@ html {
   text-align: center;
   padding: 10px;
   font-size: 1rem;
-  color: #333333;
+  color: $clr-primary-dark;
 
   a {
     font-weight: bold;
-    color: black;
+    color: $clr-primary-dark;
     text-decoration: none;
 
     &:hover {
@@ -50,7 +51,7 @@ h2 {
 // ======== task tree ========
 
 .tree-container {
-  border: 1px solid $gray;
+  border: 1px solid $clr-primary;
   border-radius: 10px;
   padding: 15px;
   height: 100%;
@@ -77,18 +78,18 @@ h2 {
   transition: all 200ms ease;
 
   &:hover {
-    border-color: #ccc;
+    border-color: $clr-primary;
   }
 
   &.active {
-    background: $lightGray;
+    background: $clr-primary-light;
   }
 }
 
 .task-checkbox {
   width: 20px;
   height: 20px;
-  border: 1px solid $gray;
+  border: 1px solid $clr-primary;
   cursor: pointer;
 }
 
@@ -106,7 +107,7 @@ h2 {
 
   &.completed {
     text-decoration: line-through;
-    color: $gray;
+    color: $clr-primary;
   }
 }
 
@@ -119,7 +120,7 @@ h2 {
   z-index: 10;
 
   background: white;
-  border: 1px solid #333;
+  border: 1px solid $clr-primary-dark;
   border-radius: 5px;
   padding: 15px;
   font-size: 1.125rem;
@@ -168,7 +169,7 @@ h2 {
 input {
   width: 100%;
   padding: 7px;
-  border: 1px solid $gray;
+  border: 1px solid $clr-primary;
   border-radius: 5px;
 }
 
@@ -203,7 +204,7 @@ input {
 
 
 .view-container {
-  border: 1px solid $gray;
+  border: 1px solid $clr-primary;
   border-radius: 10px;
   padding: 15px;
   height: 100%;
@@ -261,7 +262,7 @@ input {
 
     height: 100%;
     padding: 5px;
-    border: 1px solid $gray;
+    border: 1px solid $clr-primary;
     border-radius: 5px;
 
     font-size: 1.125rem;

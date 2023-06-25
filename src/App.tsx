@@ -22,14 +22,14 @@ const App = () => {
           <TaskView />
         </div>
         <footer className={'footer'}>
-          Тестовое задание. Код доступен на{' '}
+          <span>Тестовое задание. Код доступен на</span>
           <a
             href={'https://github.com/pablosukaban/testovoe-apricode'}
             target={'_blank'}
           >
             GitHub
           </a>
-          .
+          <span>.</span>
         </footer>
       </div>
     </>
