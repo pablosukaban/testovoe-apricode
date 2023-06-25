@@ -16,4 +16,4 @@
 
 ## Ссылка на хостинг
 
-https://apricode.vercel.app/
+https://testovoe-apricode.vercel.app/
