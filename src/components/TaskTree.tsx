@@ -10,8 +10,8 @@ const TaskTree = observer(() => {
   return (
     <div className={'tree-container'}>
       <div className={'tree-header'}>
-        <h2>Task tree</h2>
-        <button onClick={handleAddButtonClick}>Add</button>
+        <h2>Задачи</h2>
+        <button onClick={handleAddButtonClick}>Добавить</button>
       </div>
       <ul className={'task-list'}>
         {taskState.tasksList.map((item) => (
