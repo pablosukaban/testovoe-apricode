@@ -135,6 +135,13 @@ class TaskState {
       subTaskList: [],
     });
   }
+
+  editFullInfo({ title, description }: { title: string; description: string }) {
+    if (!this.chosenTask) return;
+
+    this.chosenTask.title = title;
+    this.chosenTask.description = description;
+  }
 }
 
 export default new TaskState();

@@ -34,14 +34,22 @@ type ViewEditProps = {
 };
 
 const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
-  const [editTitleValue, setEditTitleValue] = useState(
-    taskState.chosenTask ? taskState.chosenTask.title : '',
-  );
-  const [editDescriptionValue, setEditDescriptionValue] = useState(
-    taskState.chosenTask ? taskState.chosenTask.description : '',
-  );
+  const [editValue, setEditValue] = useState(() => ({
+    title: taskState.chosenTask ? taskState.chosenTask.title : '',
+    description: taskState.chosenTask ? taskState.chosenTask.description : '',
+  }));
 
   const titleRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = () => {
+    if (!editValue.title || !editValue.description) {
+      alert('Заполните все поля');
+      return;
+    }
+
+    taskState.editFullInfo(editValue);
+    cancelEditing();
+  };
 
   useEffect(() => {
     titleRef.current?.focus();
@@ -52,18 +60,22 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
       <div className={'view-header'}>
         <input
           ref={titleRef}
-          value={editTitleValue}
-          onChange={(e) => setEditTitleValue(e.target.value)}
+          value={editValue.title}
+          onChange={(e) =>
+            setEditValue({ ...editValue, title: e.target.value })
+          }
         />
         <div className={'buttons'}>
-          <button>Сохранить</button>
+          <button onClick={handleSubmit}>Сохранить</button>
           <button onClick={cancelEditing}>Отменить</button>
         </div>
       </div>
       <div className={'view-body'}>
         <textarea
-          value={editDescriptionValue}
-          onChange={(e) => setEditDescriptionValue(e.target.value)}
+          value={editValue.description}
+          onChange={(e) =>
+            setEditValue({ ...editValue, description: e.target.value })
+          }
         />
       </div>
     </>

@@ -39,6 +39,11 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
   const submitEditing = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!editValue) {
+      alert('Введите название задачи');
+      return;
+    }
+
     setIsEditing(false);
 
     taskState.editTitle(givenTask.id, editValue);
