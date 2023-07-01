@@ -94,7 +94,14 @@ class TaskState {
     if (!found) return;
 
     this.chosenTask = found;
-    this.chosenTask.isActive = !this.chosenTask.isActive;
+  }
+
+  activateTask(taskId: number) {
+    const found = findTaskById(this.tasksList, taskId);
+
+    if (!found) return;
+
+    found.isActive = !found.isActive;
   }
 
   completeTask(taskId: number) {
@@ -102,7 +109,9 @@ class TaskState {
 
     if (!found) return;
 
-    found.completed = !found.completed;
+    const currentCompleted = found.completed;
+
+    found.completed = !currentCompleted;
   }
 
   addEmptyTask() {

@@ -116,14 +116,18 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
-  useEffect(() => {
-    editInputRef.current?.focus();
-  }, [isEditing]);
-
   const handleAddSubtask = () => {
     taskState.addSubTask(givenTask.id);
     localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
+
+  const handleArrowClick = () => {
+    taskState.activateTask(givenTask.id);
+  };
+
+  useEffect(() => {
+    editInputRef.current?.focus();
+  }, [isEditing]);
 
   return (
     <div
@@ -141,7 +145,9 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
             <label
               className={`task-item-text ${givenTask.completed && 'completed'}`}
             >
-              {givenTask.isActive ? <ChevronDown /> : <ChevronRight />}
+              <span onClick={handleArrowClick} className="task-item-chevron">
+                {givenTask.isActive ? <ChevronDown /> : <ChevronRight />}
+              </span>
               <span className={`${givenTask.completed && 'completed'}`}>
                 {givenTask.title}
               </span>
