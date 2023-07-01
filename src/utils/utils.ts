@@ -35,3 +35,17 @@ export function removeTaskById(list: Task[], id: number) {
     }
   }
 }
+
+export function completeSubTasks(givenTask: Task, completed: boolean) {
+  if (givenTask.subTaskList && givenTask.subTaskList.length > 0) {
+    for (let i = 0; i < givenTask.subTaskList.length; i++) {
+      const subTask = givenTask.subTaskList[i];
+
+      subTask.completed = completed;
+
+      completeSubTasks(subTask, completed);
+    }
+  } else {
+    return;
+  }
+}

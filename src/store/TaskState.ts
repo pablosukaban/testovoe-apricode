@@ -1,5 +1,9 @@
 import { makeAutoObservable } from 'mobx';
-import { findTaskById, removeTaskById } from '../utils/utils.ts';
+import {
+  completeSubTasks,
+  findTaskById,
+  removeTaskById,
+} from '../utils/utils.ts';
 
 export type Task = {
   id: number;
@@ -113,11 +117,7 @@ class TaskState {
 
     found.completed = !currentCompleted;
 
-    if (found.subTaskList.length > 0) {
-      found.subTaskList.forEach((subTask) => {
-        subTask.completed = !currentCompleted;
-      });
-    }
+    completeSubTasks(found, !currentCompleted);
   }
 
   addEmptyTask() {

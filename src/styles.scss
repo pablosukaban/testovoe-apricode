@@ -117,7 +117,7 @@ h2 {
 .task-item-chevron {
   cursor: pointer;
 
-  transition: all 100ms ease;
+  transition: transform 100ms ease;
 
   &:hover {
     transform: scale(1.1);
