@@ -72,6 +72,33 @@ type TaskItemProps = {
   givenTask: Task;
 };
 
+type TaskCheckboxProps = {
+  completed: boolean;
+  handleCheckboxChange: (e: React.MouseEvent) => void;
+};
+
+const TaskCheckbox = observer(
+  ({ completed, handleCheckboxChange }: TaskCheckboxProps) => {
+    const r = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+      if (r.current) {
+        r.current.checked = completed;
+      }
+    }, [completed]);
+
+    return (
+      <input
+        type={'checkbox'}
+        ref={r}
+        className={'task-checkbox'}
+        defaultChecked={completed}
+        onClick={(e) => handleCheckboxChange(e)}
+      />
+    );
+  },
+);
+
 const TaskItem = observer(({ givenTask }: TaskItemProps) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
@@ -163,11 +190,9 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
                 handleAddSubtask={handleAddSubtask}
                 handleDeleteTask={handleDeleteItem}
               />
-              <input
-                type={'checkbox'}
-                className={'task-checkbox'}
-                defaultChecked={givenTask.completed}
-                onClick={(e) => handleCheckboxChange(e)}
+              <TaskCheckbox
+                completed={givenTask.completed}
+                handleCheckboxChange={handleCheckboxChange}
               />
             </span>
           </>

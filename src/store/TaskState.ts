@@ -112,6 +112,12 @@ class TaskState {
     const currentCompleted = found.completed;
 
     found.completed = !currentCompleted;
+
+    if (found.subTaskList.length > 0) {
+      found.subTaskList.forEach((subTask) => {
+        subTask.completed = !currentCompleted;
+      });
+    }
   }
 
   addEmptyTask() {
