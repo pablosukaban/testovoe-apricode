@@ -96,7 +96,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     taskState.chooseTask(givenTask.id);
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (e: React.MouseEvent) => {
     e.stopPropagation();
 
     taskState.completeTask(givenTask.id);
@@ -108,7 +108,7 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
 
     setIsMenuOpened(!isMenuOpened);
 
-    taskState.chooseTask(givenTask.id);
+    // taskState.chooseTask(givenTask.id);
   };
 
   const handleDeleteItem = () => {
@@ -160,8 +160,8 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
               <input
                 type={'checkbox'}
                 className={'task-checkbox'}
-                checked={givenTask.completed}
-                onChange={(e) => handleCheckboxChange(e)}
+                defaultChecked={givenTask.completed}
+                onClick={(e) => handleCheckboxChange(e)}
               />
             </span>
           </>

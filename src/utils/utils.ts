@@ -7,7 +7,7 @@ export function findTaskById(tasks: Task[], id: number): Task | null {
     const task = tasks[i];
 
     if (task.id === id) {
-      task.isActive = !task.isActive;
+      // task.isActive = !task.isActive;
       result = task;
 
       return result;

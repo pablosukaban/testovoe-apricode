@@ -94,6 +94,7 @@ class TaskState {
     if (!found) return;
 
     this.chosenTask = found;
+    this.chosenTask.isActive = !this.chosenTask.isActive;
   }
 
   completeTask(taskId: number) {
@@ -130,6 +131,8 @@ class TaskState {
     const found = findTaskById(this.tasksList, taskId);
 
     if (!found) return;
+
+    found.isActive = true;
 
     found.subTaskList.push({
       id: Date.now(),
