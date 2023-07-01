@@ -15,6 +15,7 @@ html {
 
 .wrapper {
   height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,6 +24,7 @@ html {
 
 .container {
   height: 100%;
+  min-height: 800px;
   display: grid;
   //grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr 2fr;
@@ -130,7 +132,7 @@ h2 {
   top: 100%;
   right: 0;
 
-  z-index: 10;
+  z-index: 200000;
 
   background: white;
   border: 1px solid $clr-primary-dark;
@@ -285,7 +287,7 @@ input {
     grid-template-rows: auto;
   }
 
-  .tree-container {
-    overflow-y: hidden;
-  }
+  // .tree-container {
+  //   overflow-y: hidden;
+  // }
 }

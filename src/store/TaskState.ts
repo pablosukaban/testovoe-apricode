@@ -171,6 +171,10 @@ class TaskState {
     removeTaskById(this.tasksList, taskId);
     this.chosenTask = null;
   }
+
+  deleteCompletedTasks() {
+    this.tasksList = this.tasksList.filter((task) => !task.completed);
+  }
 }
 
 export default new TaskState();
