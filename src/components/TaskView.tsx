@@ -50,7 +50,9 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
 
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!editValue.title || !editValue.description) {
       alert('Заполните все поля');
       return;
@@ -66,7 +68,7 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
   }, []);
 
   return (
-    <>
+    <form className='view-form'>
       <div className={'view-header'}>
         <input
           ref={titleRef}
@@ -77,7 +79,9 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
         />
         <div className={'buttons'}>
           <button onClick={handleSubmit}>Сохранить</button>
-          <button onClick={cancelEditing}>Отменить</button>
+          <button onClick={cancelEditing} type="button">
+            Отменить
+          </button>
         </div>
       </div>
       <div className={'view-body'}>
@@ -88,7 +92,7 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
           }
         />
       </div>
-    </>
+    </form>
   );
 });
 
