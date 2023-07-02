@@ -80,7 +80,7 @@ h2 {
 
   border: 2px solid transparent;
 
-  transition: all 200ms ease;
+  transition: all 150ms ease;
 
   &:hover {
     border-color: $clr-primary;
@@ -88,6 +88,10 @@ h2 {
 
   &.active {
     background: $clr-primary-light;
+  }
+
+  &.chosen {
+    border-color: $clr-primary-dark;
   }
 }
 

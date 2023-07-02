@@ -152,13 +152,17 @@ const TaskItem = observer(({ givenTask }: TaskItemProps) => {
     taskState.activateTask(givenTask.id);
   };
 
+  const isChosen = givenTask.id === taskState.chosenTask?.id;
+
   useEffect(() => {
     editInputRef.current?.focus();
   }, [isEditing]);
 
   return (
     <div
-      className={`task-item-container ${givenTask.isActive && 'active'}`}
+      className={`task-item-container ${givenTask.isActive && 'active'} ${
+        isChosen && 'chosen'
+      }`}
       onClick={(e) => handleItemClick(e)}
     >
       <div className={'task-item-main'}>
