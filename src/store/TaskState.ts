@@ -12,10 +12,11 @@ export type Task = {
   completed: boolean;
   isActive: boolean;
   isEditing?: boolean;
+  createdAt: Date;
   subTaskList: Task[];
 };
 
-export const tempData = [
+export const tempData: Task[] = [
   {
     id: 1,
     title: 'Task 1',
@@ -23,6 +24,7 @@ export const tempData = [
     completed: false,
     isActive: false,
     isEditing: false,
+    createdAt: new Date(),
     subTaskList: [
       {
         id: 1.1,
@@ -32,6 +34,7 @@ export const tempData = [
         completed: false,
         isActive: false,
         isEditing: false,
+        createdAt: new Date(),
         subTaskList: [
           {
             id: 1.11,
@@ -41,6 +44,7 @@ export const tempData = [
             completed: false,
             isActive: false,
             isEditing: false,
+            createdAt: new Date(),
             subTaskList: [],
           },
         ],
@@ -53,6 +57,7 @@ export const tempData = [
         completed: false,
         isActive: false,
         isEditing: false,
+        createdAt: new Date(),
         subTaskList: [],
       },
     ],
@@ -64,6 +69,7 @@ export const tempData = [
     completed: false,
     isActive: false,
     isEditing: false,
+    createdAt: new Date(),
     subTaskList: [
       {
         id: 2.1,
@@ -73,6 +79,7 @@ export const tempData = [
         completed: false,
         isActive: false,
         isEditing: false,
+        createdAt: new Date(),
         subTaskList: [],
       },
     ],
@@ -128,6 +135,7 @@ class TaskState {
       completed: false,
       isActive: false,
       isEditing: true,
+      createdAt: new Date(),
       subTaskList: [],
     });
   }
@@ -156,6 +164,7 @@ class TaskState {
       completed: false,
       isActive: false,
       isEditing: true,
+      createdAt: new Date(),
       subTaskList: [],
     });
   }

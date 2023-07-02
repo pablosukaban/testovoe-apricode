@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import taskState from '../store/TaskState.ts';
 import { useEffect, useRef, useState } from 'react';
+import dayjs from 'dayjs';
 
 type ViewTaskProps = {
   startEditing: () => void;
@@ -16,12 +17,17 @@ const ViewTask = observer(({ startEditing }: ViewTaskProps) => {
     localStorage.setItem('tasks', JSON.stringify(taskState.tasksList));
   };
 
+  const date = dayjs(taskState.chosenTask?.createdAt).format('DD.MM.YYYY');
+
   return (
     <>
       <div className={'view-header'}>
         {taskState.chosenTask ? (
           <>
-            <h2>{taskState.chosenTask.title}</h2>
+            <div className="view-header-title">
+              <h2>{taskState.chosenTask.title}</h2>
+              <h3>Дата создания: {date}</h3>
+            </div>
             <div className={'buttons'}>
               <button onClick={startEditing}>Редактировать</button>
               <button onClick={handleDeleteClick}>Удалить</button>
@@ -68,7 +74,7 @@ const ViewEdit = observer(({ cancelEditing }: ViewEditProps) => {
   }, []);
 
   return (
-    <form className='view-form'>
+    <form className="view-form">
       <div className={'view-header'}>
         <input
           ref={titleRef}
