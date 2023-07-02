@@ -17,13 +17,25 @@ const TaskTree = observer(() => {
   return (
     <div className={'tree-container'}>
       <div className={'tree-header'}>
-        <h2>Задачи</h2>
+        <div className="tree-header-title">
+          <h2>Ваши Задачи</h2>
+          <p>
+            Осталось {taskState.tasksLeft}{' '}
+            {taskState.tasksLeft === 1
+              ? 'задача'
+              : taskState.tasksLeft < 5 && taskState.tasksLeft > 1
+              ? 'задачи'
+              : 'задач'}
+            .
+          </p>
+        </div>
+
         <div className={'tree-header-buttons'}>
           <button onClick={handleAddButtonClick} title="Добавить задачу">
-            <PlusSquare className='tree-icon' />
+            <PlusSquare className="tree-icon" />
           </button>
           <button onClick={handleDeleteClick} title="Удалить выделенное">
-            <XSquare className='tree-icon' />
+            <XSquare className="tree-icon" />
           </button>
         </div>
       </div>

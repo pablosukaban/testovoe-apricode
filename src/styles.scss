@@ -171,7 +171,7 @@ h2 {
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   gap: 10px;
 
   button {
@@ -183,6 +183,15 @@ h2 {
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.tree-header-title {
+  p {
+    font-weight: 500;
+    font-size: 1.125rem;
+    color: $clr-primary-dark;
+    margin-bottom: 5px;
   }
 }
 
@@ -248,7 +257,6 @@ input {
   gap: 10px;
 
   height: 100%;
-
 }
 
 .view-header {

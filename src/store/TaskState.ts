@@ -175,6 +175,10 @@ class TaskState {
   deleteCompletedTasks() {
     this.tasksList = this.tasksList.filter((task) => !task.completed);
   }
+
+  get tasksLeft() {
+    return this.tasksList.filter((task) => !task.completed).length;
+  }
 }
 
 export default new TaskState();
