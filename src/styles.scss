@@ -120,6 +120,10 @@ h2 {
   cursor: pointer;
 
   transition: transform 100ms ease;
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  border-radius: 100%;
 
   &:hover {
     transform: scale(1.1);
@@ -167,7 +171,6 @@ h2 {
   gap: 10px;
 
   button {
-    font-size: 1.25rem;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -177,6 +180,11 @@ h2 {
       text-decoration: underline;
     }
   }
+}
+
+.tree-icon {
+  width: 30px;
+  height: 30px;
 }
 
 input {

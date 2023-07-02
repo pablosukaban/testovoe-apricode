@@ -18,12 +18,12 @@ const TaskTree = observer(() => {
     <div className={'tree-container'}>
       <div className={'tree-header'}>
         <h2>Задачи</h2>
-        <div>
+        <div className={'tree-header-buttons'}>
           <button onClick={handleAddButtonClick} title="Добавить задачу">
-            <PlusSquare />
+            <PlusSquare className='tree-icon' />
           </button>
           <button onClick={handleDeleteClick} title="Удалить выделенное">
-            <XSquare />
+            <XSquare className='tree-icon' />
           </button>
         </div>
       </div>
